@@ -1,0 +1,161 @@
+.header {
+  background: linear-gradient(
+    to bottom right,
+    rgb(255, 170, 1),
+    rgb(255, 213, 1)
+  );
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  padding: 1.5em;
+  color: white;
+  width: 100%;
+}
+
+.header__logoLink {
+  text-decoration: none;
+  color: white;
+}
+
+.header__logo {
+  font-size: 2.7rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.header__actions {
+  display: grid;
+  grid-template-columns: 3rem 6fr 2fr;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  width: 100%;
+}
+
+.header__hamburgerButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.17rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  padding: 0.5em;
+  cursor: pointer;
+}
+
+.header__hamburgerButton:hover {
+  background-color: rgba(255, 69, 0, 0.9);
+}
+
+.header__hamburgerSlice {
+  background-color: white;
+  border-radius: 5px;
+  width: 95%;
+  height: 23%;
+}
+
+.header__search {
+  display: flex;
+  justify-content: center;
+}
+
+.header__searchInput {
+  font-size: 1.2rem;
+  color: var(--black);
+  width: 70%;
+  border: none;
+  outline: none;
+  padding: 0.3em;
+  border-radius: 3px;
+}
+
+.header__searchButton {
+  background-color: orangered;
+  border: none;
+  outline: none;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  padding: 0.5em;
+  cursor: pointer;
+}
+
+.header__searchButton:disabled {
+  background-color: rgb(216, 71, 18);
+  cursor: not-allowed;
+}
+
+.header__searchButton--image {
+  color: white;
+}
+
+.header__cartAndProfile {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1rem;
+  font-size: 1.05rem;
+}
+
+.header__cart {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  position: relative;
+}
+
+.header__profile {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.header__cartItemsCount {
+  align-self: flex-start;
+  background-color: orangered;
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1rem;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__cart:hover,
+.header__profile:hover {
+  color: orangered;
+  cursor: pointer;
+}
+
+.header__cart:hover .header__cartItemsCount {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 800px) {
+  .header__actions {
+    grid-template-columns: 3rem 1fr;
+    grid-auto-rows: 1fr;
+  }
+
+  .header__search {
+    justify-content: end;
+  }
+
+  .header__searchInput {
+    width: 90%;
+  }
+
+  .header__cartAndProfile {
+    grid-column: span 2;
+    justify-self: end;
+  }
+}

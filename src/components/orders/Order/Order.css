@@ -1,0 +1,112 @@
+.order {
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  padding: 1em;
+}
+
+.order__imageAndName {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.order__imageBox {
+  width: 100%;
+  padding: 0.5em;
+}
+
+.order__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.order__productName {
+  font-size: 1.3rem;
+  color: var(--black);
+}
+
+.order__info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.order__fieldset {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 0.5em;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: orangered;
+}
+
+.order__fieldsetTitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.order__statusSelect {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--black);
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.order__statusSelect:hover,
+.order__statusSelect:focus {
+  border: 1.5px solid orangered;
+}
+
+.order__statusOption {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.order__updateButton {
+  grid-column: span 2;
+  justify-self: right;
+  cursor: pointer;
+  background: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  outline: none;
+  font-size: 1.1rem;
+  color: rgba(37, 37, 37);
+  padding: 0.5em 1em;
+  margin-top: 3rem;
+}
+
+.order__updateButton:hover,
+.order__updateButton:focus {
+  background-color: orangered;
+  color: white;
+  border-color: white;
+}
+
+.order__updateButton:disabled {
+  background-color: rgb(216, 71, 18);
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .order {
+    grid-template-columns: 1fr;
+  }
+
+  .order__productName {
+    font-size: 2.1rem;
+  }
+}

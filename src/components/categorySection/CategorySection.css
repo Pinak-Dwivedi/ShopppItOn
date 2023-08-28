@@ -1,0 +1,31 @@
+.category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3em 1em;
+}
+
+.category__heading {
+  font-size: 2rem;
+  font-weight: 500;
+  border-bottom: 3px solid orangered;
+}
+
+.category__productsList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  padding: 3em 1em;
+}
+
+@media (max-width: 800px) {
+  .category__productsList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .category__productsList {
+    grid-template-columns: 1fr;
+  }
+}

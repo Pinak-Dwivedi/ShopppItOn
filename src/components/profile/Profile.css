@@ -1,0 +1,135 @@
+.profile {
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.profile__heading {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #111;
+  border-bottom: 3px solid orangered;
+}
+
+.profile__form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.profile__formField {
+  display: flex;
+  flex-direction: column;
+  margin: 3rem 0;
+  width: 90%;
+}
+
+.profile__formLabel {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.profile__formInput {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--black);
+  border: 1px solid black;
+  border-radius: 5px;
+  outline: none;
+  padding: 0.3em;
+}
+
+.profile__formInput:focus {
+  border: 1.5px solid orangered;
+}
+
+.profile__formError {
+  font-weight: 500;
+  color: rgb(255, 34, 0);
+}
+
+.profile__formField.profile__image {
+  margin: 0;
+  justify-content: space-between;
+}
+
+.profile__imagePreviewContainer {
+  align-self: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile__imagePreview {
+  color: orangered;
+  width: 75%;
+  height: 75%;
+  font-size: 5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.profile__imageInput {
+  padding: 0;
+  border: none;
+  width: 50%;
+  align-self: center;
+}
+
+.profile__imageInput::file-selector-button {
+  cursor: pointer;
+  background: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  outline: none;
+  font-size: 0.9em;
+  color: rgba(37, 37, 37);
+  padding: 0.5em 0.7em;
+  width: 100%;
+}
+
+.profile__imageInput::file-selector-button:hover {
+  background-color: orangered;
+  color: white;
+  border-color: white;
+}
+
+.profile__formButton {
+  grid-column: span 2;
+  justify-self: end;
+  cursor: pointer;
+  background: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  outline: none;
+  font-size: 1.1rem;
+  color: rgba(37, 37, 37);
+  padding: 0.5em 0.7em;
+  width: fit-content;
+}
+
+.profile__formButton:hover,
+.profile__formButton:focus {
+  background-color: orangered;
+  color: white;
+  border-color: white;
+}
+
+.profile__formButton:disabled {
+  background-color: rgb(216, 71, 18);
+  cursor: not-allowed;
+}
+
+@media (max-width: 500px) {
+  .profile__form {
+    grid-template-columns: 1fr;
+  }
+
+  .profile__formButton {
+    grid-column: auto;
+    justify-self: center;
+  }
+}

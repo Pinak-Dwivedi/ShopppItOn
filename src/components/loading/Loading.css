@@ -1,0 +1,34 @@
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(
+    to bottom right,
+    rgb(255, 213, 1),
+    rgb(255, 170, 1)
+  );
+}
+
+.loading__wheel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  color: var(--black);
+  width: 9rem;
+  height: 9rem;
+
+  border: 1rem solid #111;
+  border-top-color: orangered;
+  border-right-color: orangered;
+  border-radius: 50%;
+
+  animation: rotate 2.1s linear infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}

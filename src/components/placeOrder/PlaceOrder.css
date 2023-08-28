@@ -1,0 +1,123 @@
+.placeOrder {
+  padding: 0.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.placeOrder__formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+  padding: 3em;
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}
+
+.placeOrder__formContainer.paymentForm {
+  display: none;
+}
+
+.placeOrder__formContainer.paymentForm.active {
+  display: flex;
+}
+
+.placeOrder__formHeading {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #111;
+  border-bottom: 3px solid orangered;
+}
+
+.placeOrder__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 90%;
+  border-radius: 5px;
+}
+
+.placeOrder__formField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 75%;
+}
+
+.placeOrder__formLabel {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.placeOrder__formLabelIcon {
+  color: orangered;
+}
+
+.placeOrder__formInput,
+.placeOrder__formSelect {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--black);
+  border: 1px solid black;
+  border-radius: 5px;
+  outline: none;
+  padding: 0.3em;
+  resize: none;
+}
+.placeOrder__formOption {
+  font-size: 1rem;
+}
+
+.placeOrder__total {
+  align-self: flex-end;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--black);
+  border-radius: 5px;
+  border-bottom: 3px solid;
+  padding: 0.5em 1em;
+}
+
+.placeOrder__formInput:focus,
+.placeOrder__formSelect:focus {
+  border: 1.5px solid orangered;
+}
+
+.placeOrder__formError {
+  font-weight: 500;
+  color: rgb(255, 34, 0);
+}
+
+.placeOrder__formButton {
+  cursor: pointer;
+  background: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  outline: none;
+  font-size: 1.1rem;
+  color: rgba(37, 37, 37);
+  padding: 0.5em;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.placeOrder__formButton:hover,
+.placeOrder__formButton:focus {
+  background-color: orangered;
+  color: white;
+  border-color: white;
+}
+
+.placeOrder__formButton:disabled {
+  background-color: rgb(216, 71, 18);
+  cursor: not-allowed;
+}

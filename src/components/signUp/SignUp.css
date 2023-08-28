@@ -1,0 +1,184 @@
+.signUp {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  font-size: 1rem;
+  z-index: 1;
+}
+
+.signUp.signUp--active {
+  display: flex;
+  pointer-events: all;
+}
+
+.signUp__formContainer {
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  padding: 0.5em;
+  width: 70%;
+  max-width: 600px;
+}
+
+.signUp__heading {
+  font-size: 1.3em;
+  font-weight: 500;
+  color: #111;
+  border-bottom: 3px solid orangered;
+}
+
+.signUp__closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0.9em;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: rgba(37, 37, 37);
+  padding: 0.3em;
+}
+
+.signUp__closeButton:hover {
+  color: orangered;
+}
+
+.signUp__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.signUp__formField {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+
+.signUp__formLabel {
+  font-size: 0.9em;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.signUp__formInput {
+  font-size: 1em;
+  font-weight: 500;
+  color: var(--black);
+  border: 1px solid black;
+  border-radius: 5px;
+  outline: none;
+  padding: 0.2em;
+}
+
+.signUp__formInput:focus {
+  border: 1.5px solid orangered;
+}
+
+.signUp__formError {
+  font-weight: 500;
+  color: rgb(255, 34, 0);
+}
+
+.signUp__profileImage {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.signUp__profileImagePreview {
+  color: orangered;
+  font-size: 0.9em;
+  width: 4.5em;
+  height: 4.5em;
+  border-radius: 50%;
+}
+
+.signUp__profileImageInput {
+  padding: 0;
+  border: none;
+}
+
+.signUp__profileImageInput::file-selector-button {
+  cursor: pointer;
+  background: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  outline: none;
+  font-size: 0.9em;
+  color: rgba(37, 37, 37);
+  padding: 0.5em 0.7em;
+  width: 100%;
+}
+
+.signUp__profileImageInput::file-selector-button:hover {
+  background-color: orangered;
+  color: white;
+  border-color: white;
+}
+
+.signUp__formButton {
+  cursor: pointer;
+  background: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  outline: none;
+  font-size: 1em;
+  color: rgba(37, 37, 37);
+  padding: 0.5em 0.7em;
+}
+
+.signUp__formButton:hover,
+.signUp__formButton:focus {
+  background-color: orangered;
+  color: white;
+  border-color: white;
+}
+
+.signUp__formButton:disabled {
+  background-color: rgb(216, 71, 18);
+  cursor: not-allowed;
+}
+
+.signUp__toLogin {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.signUp__toLoginText {
+  font-size: 1em;
+  font-weight: 400;
+  color: rgba(37, 37, 37);
+}
+
+.signUp__toLoginButton {
+  cursor: pointer;
+  background: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  outline: none;
+  font-size: 1em;
+  cursor: pointer;
+  color: rgba(37, 37, 37);
+  padding: 0.1em;
+}
+
+.signUp__toLoginButton:hover {
+  background-color: orangered;
+  color: white;
+  border-color: white;
+}
