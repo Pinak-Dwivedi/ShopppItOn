@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ShopppItOn/static/css/main.fe91a714.css",
-    "main.js": "/ShopppItOn/static/js/main.258798e2.js",
+    "main.js": "/ShopppItOn/static/js/main.78ecb849.js",
     "static/css/758.7a6d8273.chunk.css": "/ShopppItOn/static/css/758.7a6d8273.chunk.css",
     "static/js/758.8e0c78ab.chunk.js": "/ShopppItOn/static/js/758.8e0c78ab.chunk.js",
     "static/css/424.a0e0c560.chunk.css": "/ShopppItOn/static/css/424.a0e0c560.chunk.css",
@@ -30,7 +30,7 @@
     "static/media/hero-img1.jpg": "/ShopppItOn/static/media/hero-img1.0d7780268917375502b0.jpg",
     "index.html": "/ShopppItOn/index.html",
     "main.fe91a714.css.map": "/ShopppItOn/static/css/main.fe91a714.css.map",
-    "main.258798e2.js.map": "/ShopppItOn/static/js/main.258798e2.js.map",
+    "main.78ecb849.js.map": "/ShopppItOn/static/js/main.78ecb849.js.map",
     "758.7a6d8273.chunk.css.map": "/ShopppItOn/static/css/758.7a6d8273.chunk.css.map",
     "758.8e0c78ab.chunk.js.map": "/ShopppItOn/static/js/758.8e0c78ab.chunk.js.map",
     "424.a0e0c560.chunk.css.map": "/ShopppItOn/static/css/424.a0e0c560.chunk.css.map",
@@ -59,6 +59,6 @@
   },
   "entrypoints": [
     "static/css/main.fe91a714.css",
-    "static/js/main.258798e2.js"
+    "static/js/main.78ecb849.js"
   ]
 }
