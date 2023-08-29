@@ -186,7 +186,7 @@ export default function PlaceOrder() {
               </label>
               <select
                 className="placeOrder__formSelect"
-                id="country"
+                id="state"
                 value={state}
                 onChange={(e) => setState(e.target.value)}
               >
@@ -247,19 +247,25 @@ export default function PlaceOrder() {
         <form className="placeOrder__form" onSubmit={(e) => processPayment(e)}>
           <div className="placeOrder__formField">
             <label htmlFor="cardNumber" className="placeOrder__formLabel">
-              Card Number{" "}
+              Card Number
               <BsCreditCard2BackFill className="placeOrder__formLabelIcon" />
             </label>
-            <CardNumberElement className="placeOrder__formInput" />
+            <CardNumberElement
+              id="cardNumber"
+              className="placeOrder__formInput"
+            />
             <span className="placeOrder__formError"></span>
           </div>
 
           <div className="placeOrder__formField paymentForm">
             <label htmlFor="cardExpiry" className="placeOrder__formLabel">
-              Expiry{" "}
+              Expiry
               <BsCalendar2EventFill className="placeOrder__formLabelIcon" />
             </label>
-            <CardExpiryElement className="placeOrder__formInput" />
+            <CardExpiryElement
+              id="cardExpiry"
+              className="placeOrder__formInput"
+            />
             <span className="placeOrder__formError"></span>
           </div>
 
@@ -267,7 +273,7 @@ export default function PlaceOrder() {
             <label htmlFor="cardCVC" className="placeOrder__formLabel">
               CVC <BsKeyFill className="placeOrder__formLabelIcon" />
             </label>
-            <CardCvcElement className="placeOrder__formInput" />
+            <CardCvcElement id="cardCVC" className="placeOrder__formInput" />
             <span className="placeOrder__formError"></span>
           </div>
 
