@@ -114,8 +114,8 @@ const productSlice = createSlice({
         return;
       }
 
-      toast.dismiss();
-      toast.error(action.error.message);
+      // toast.dismiss();
+      // toast.error(action.error.message);
     });
 
     // get product
@@ -145,8 +145,8 @@ const productSlice = createSlice({
         return;
       }
 
-      toast.dismiss();
-      toast.error(action.error.message);
+      // toast.dismiss();
+      // toast.error(action.error.message);
     });
 
     // get product reviews
@@ -173,8 +173,8 @@ const productSlice = createSlice({
         return;
       }
 
-      toast.dismiss();
-      toast.error(action.error.message);
+      // toast.dismiss();
+      // toast.error(action.error.message);
     });
 
     // create product
@@ -207,8 +207,8 @@ const productSlice = createSlice({
         return;
       }
 
-      toast.dismiss();
-      toast.error(action.error.message);
+      // toast.dismiss();
+      // toast.error(action.error.message);
     });
 
     // update product
@@ -241,8 +241,8 @@ const productSlice = createSlice({
         return;
       }
 
-      toast.dismiss();
-      toast.error(action.error.message);
+      // toast.dismiss();
+      // toast.error(action.error.message);
     });
 
     // create product review
@@ -275,8 +275,8 @@ const productSlice = createSlice({
         return;
       }
 
-      toast.dismiss();
-      toast.error(action.error.message);
+      // toast.dismiss();
+      // toast.error(action.error.message);
     });
   },
 });

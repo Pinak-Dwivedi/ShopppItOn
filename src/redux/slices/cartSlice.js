@@ -250,8 +250,8 @@ const cartSlice = createSlice({
         return;
       }
 
-      toast.dismiss();
-      toast.error(action.error.message);
+      // toast.dismiss();
+      // toast.error(action.error.message);
     });
 
     // get from cart
@@ -302,8 +302,8 @@ const cartSlice = createSlice({
         return;
       }
 
-      toast.dismiss();
-      toast.error(action.error.message);
+      // toast.dismiss();
+      // toast.error(action.error.message);
     });
   },
 });

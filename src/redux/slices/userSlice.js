@@ -81,8 +81,8 @@ const userSlice = createSlice({
         return;
       }
 
-      toast.dismiss();
-      toast.error(action.error.message);
+      // toast.dismiss();
+      // toast.error(action.error.message);
     });
 
     // register
@@ -119,8 +119,8 @@ const userSlice = createSlice({
         return;
       }
 
-      toast.dismiss();
-      toast.error(action.error.message);
+      // toast.dismiss();
+      // toast.error(action.error.message);
     });
 
     // update
@@ -169,8 +169,8 @@ const userSlice = createSlice({
         return;
       }
 
-      toast.dismiss();
-      toast.error(action.error.message);
+      // toast.dismiss();
+      // toast.error(action.error.message);
     });
 
     // logout
@@ -216,8 +216,8 @@ const userSlice = createSlice({
         return;
       }
 
-      toast.dismiss();
-      toast.error(action.error.message);
+      // toast.dismiss();
+      // toast.error(action.error.message);
     });
 
     // check if authenticated
@@ -339,8 +339,8 @@ const userSlice = createSlice({
         return;
       }
 
-      toast.dismiss();
-      toast.error(action.error.message);
+      // toast.dismiss();
+      // toast.error(action.error.message);
     });
 
     // reset password
@@ -379,8 +379,8 @@ const userSlice = createSlice({
         return;
       }
 
-      toast.dismiss();
-      toast.error(action.error.message);
+      // toast.dismiss();
+      // toast.error(action.error.message);
     });
   },
 });

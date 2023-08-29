@@ -70,8 +70,8 @@ const orderSlice = createSlice({
         return;
       }
 
-      toast.dismiss();
-      toast.error(action.error.message);
+      // toast.dismiss();
+      // toast.error(action.error.message);
     });
 
     // get orders
@@ -120,8 +120,8 @@ const orderSlice = createSlice({
         return;
       }
 
-      toast.dismiss();
-      toast.error(action.error.message);
+      // toast.dismiss();
+      // toast.error(action.error.message);
     });
 
     // get all orders
@@ -171,8 +171,8 @@ const orderSlice = createSlice({
         return;
       }
 
-      toast.dismiss();
-      toast.error(action.error.message);
+      // toast.dismiss();
+      // toast.error(action.error.message);
     });
 
     // update order
@@ -215,8 +215,8 @@ const orderSlice = createSlice({
         return;
       }
 
-      toast.dismiss();
-      toast.error(action.error.message);
+      // toast.dismiss();
+      // toast.error(action.error.message);
     });
 
     // make payment
@@ -260,8 +260,8 @@ const orderSlice = createSlice({
         return;
       }
 
-      toast.dismiss();
-      toast.error(action.error.message);
+      // toast.dismiss();
+      // toast.error(action.error.message);
     });
   },
 });
