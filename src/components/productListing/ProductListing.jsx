@@ -34,7 +34,7 @@ export default function ProductListing() {
     if (shouldMakeGetProductsRequest.current === true) {
       let query = `${searchQuery.search}${searchQuery.filter}${searchQuery.page}`;
 
-      dispatch(getProductsThunk(`${query}`));
+      dispatch(getProductsThunk(query));
 
       return () => {
         shouldMakeGetProductsRequest.current = false;
