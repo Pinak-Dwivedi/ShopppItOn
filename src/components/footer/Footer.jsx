@@ -1,6 +1,6 @@
 import "./Footer.css";
 import { Link } from "react-router-dom";
-import { FaFacebookF, FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaYoutube, FaLinkedinIn } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -46,18 +46,17 @@ export default function Footer() {
           <li className="footer__socialMediaListItem">
             <Link
               className="footer__socialMediaLink"
-              to="https://github.com/"
+              to="https://www.youtube.com/"
               target="_blank"
             >
-              <FaGithub className="footer__socialMediaIcon" />
+              <FaYoutube className="footer__socialMediaIcon" />
             </Link>
           </li>
 
           <li className="footer__socialMediaListItem">
             <Link
               className="footer__socialMediaLink"
-              to="https://www.linkedin.com/in/
-              pinak-dwivedi"
+              to="https://www.linkedin.com/in/pinak-dwivedi/"
               target="_blank"
             >
               <FaLinkedinIn className="footer__socialMediaIcon" />
