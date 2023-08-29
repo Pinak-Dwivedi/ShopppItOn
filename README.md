@@ -4,7 +4,7 @@
 Hi! It's Pinak Dwivedi. I have created this web service with React, Node, Express and MySQL.
 
 ## About This Repo
-This Repo is the frontend part of the web app named Shoppp It On and backend of this at ShopppItOn-Backend.
+This Repo is the frontend part of the web app named Shoppp It On and backend of this is at ShopppItOn-Backend.
 
 Used Create React App.
 Created components in React.
@@ -14,6 +14,6 @@ Editor used is VS Code.
 Communicating with API based based node, express backend.
 
 ## Service Is LIVE At
-https://pinak-dwivedi.github.io/ManageYourTodos/
+https://pinak-dwivedi.github.io/ShopppItOn/
 
 ### So... go ahead and Shoppp It On....!
