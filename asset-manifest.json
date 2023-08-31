@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ShopppItOn/static/css/main.fe91a714.css",
-    "main.js": "/ShopppItOn/static/js/main.d0ed0f1c.js",
+    "main.js": "/ShopppItOn/static/js/main.fee9d80c.js",
     "static/css/758.7a6d8273.chunk.css": "/ShopppItOn/static/css/758.7a6d8273.chunk.css",
     "static/js/758.8e0c78ab.chunk.js": "/ShopppItOn/static/js/758.8e0c78ab.chunk.js",
     "static/css/424.a0e0c560.chunk.css": "/ShopppItOn/static/css/424.a0e0c560.chunk.css",
@@ -21,7 +21,7 @@
     "static/css/953.75f2eb33.chunk.css": "/ShopppItOn/static/css/953.75f2eb33.chunk.css",
     "static/js/953.e2769bea.chunk.js": "/ShopppItOn/static/js/953.e2769bea.chunk.js",
     "static/css/280.21524bf0.chunk.css": "/ShopppItOn/static/css/280.21524bf0.chunk.css",
-    "static/js/280.2ee6c383.chunk.js": "/ShopppItOn/static/js/280.2ee6c383.chunk.js",
+    "static/js/280.9e1b7a78.chunk.js": "/ShopppItOn/static/js/280.9e1b7a78.chunk.js",
     "static/css/55.c29f32c1.chunk.css": "/ShopppItOn/static/css/55.c29f32c1.chunk.css",
     "static/js/55.cababd9d.chunk.js": "/ShopppItOn/static/js/55.cababd9d.chunk.js",
     "static/css/900.6529a1ac.chunk.css": "/ShopppItOn/static/css/900.6529a1ac.chunk.css",
@@ -30,7 +30,7 @@
     "static/media/hero-img1.jpg": "/ShopppItOn/static/media/hero-img1.0d7780268917375502b0.jpg",
     "index.html": "/ShopppItOn/index.html",
     "main.fe91a714.css.map": "/ShopppItOn/static/css/main.fe91a714.css.map",
-    "main.d0ed0f1c.js.map": "/ShopppItOn/static/js/main.d0ed0f1c.js.map",
+    "main.fee9d80c.js.map": "/ShopppItOn/static/js/main.fee9d80c.js.map",
     "758.7a6d8273.chunk.css.map": "/ShopppItOn/static/css/758.7a6d8273.chunk.css.map",
     "758.8e0c78ab.chunk.js.map": "/ShopppItOn/static/js/758.8e0c78ab.chunk.js.map",
     "424.a0e0c560.chunk.css.map": "/ShopppItOn/static/css/424.a0e0c560.chunk.css.map",
@@ -50,7 +50,7 @@
     "953.75f2eb33.chunk.css.map": "/ShopppItOn/static/css/953.75f2eb33.chunk.css.map",
     "953.e2769bea.chunk.js.map": "/ShopppItOn/static/js/953.e2769bea.chunk.js.map",
     "280.21524bf0.chunk.css.map": "/ShopppItOn/static/css/280.21524bf0.chunk.css.map",
-    "280.2ee6c383.chunk.js.map": "/ShopppItOn/static/js/280.2ee6c383.chunk.js.map",
+    "280.9e1b7a78.chunk.js.map": "/ShopppItOn/static/js/280.9e1b7a78.chunk.js.map",
     "55.c29f32c1.chunk.css.map": "/ShopppItOn/static/css/55.c29f32c1.chunk.css.map",
     "55.cababd9d.chunk.js.map": "/ShopppItOn/static/js/55.cababd9d.chunk.js.map",
     "900.6529a1ac.chunk.css.map": "/ShopppItOn/static/css/900.6529a1ac.chunk.css.map",
@@ -59,6 +59,6 @@
   },
   "entrypoints": [
     "static/css/main.fe91a714.css",
-    "static/js/main.d0ed0f1c.js"
+    "static/js/main.fee9d80c.js"
   ]
 }
