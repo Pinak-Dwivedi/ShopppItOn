@@ -2,7 +2,7 @@ import "./Orders.css";
 import Order from "./Order/Order";
 import Pagination from "../pagination/Pagination";
 import { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import {
   getOrdersThunk,
   getAllOrdersThunk,
@@ -14,7 +14,7 @@ import formatNumberAsPrice from "../../utils/formatNumberAsPrice";
 export default function Orders() {
   const shouldMakeGetOrdersCall = useRef(true);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const { orders, pagination, totalOrdersPrice } = useSelector(
     (state) => state.order
   );
@@ -26,15 +26,15 @@ export default function Orders() {
         dispatch(getAllOrdersThunk("page=1"));
       } else if (isAuthenticated) {
         dispatch(getOrdersThunk("page=1"));
-      } else if (!isAuthenticated) {
-        return navigate("/");
       }
 
       return () => {
         shouldMakeGetOrdersCall.current = false;
       };
     }
-  }, [dispatch, isAuthenticated, user, navigate]);
+  }, [dispatch, isAuthenticated, user]);
+
+  if (!isAuthenticated) return <Navigate to="/" replace />;
 
   function onPrevPage(newPage) {
     if (isAuthenticated && user.role === "admin") {

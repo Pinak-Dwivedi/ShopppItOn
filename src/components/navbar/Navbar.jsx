@@ -79,11 +79,17 @@ export default function Navbar({ navRef }) {
             </Link>
           </li>
         ) : (
+          ""
+        )}
+
+        {isAuthenticated && user?.role !== "admin" ? (
           <li className="navbar__listItem">
             <Link to="/orders" className="navbar__link">
               My Orders
             </Link>
           </li>
+        ) : (
+          ""
         )}
 
         {isAuthenticated ? (

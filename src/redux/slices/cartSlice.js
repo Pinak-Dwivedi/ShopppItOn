@@ -243,7 +243,7 @@ const cartSlice = createSlice({
         state.isAuthenticated = false;
         state.user = null;
 
-        <Navigate to="/" />;
+        <Navigate to="/" replace />;
 
         toast.dismiss();
         toast.error(action.payload.message);

@@ -57,7 +57,7 @@ const orderSlice = createSlice({
         state.isAuthenticated = false;
         state.user = null;
 
-        <Navigate to="/" />;
+        <Navigate to="/" replace />;
 
         toast.dismiss();
         toast.error(action.payload.message);
@@ -108,7 +108,7 @@ const orderSlice = createSlice({
         action?.payload?.success === false &&
         action?.payload?.message === "Login First"
       ) {
-        <Navigate to="/" />;
+        <Navigate to="/" replace />;
         toast.dismiss();
         toast.error(action.payload.message);
         return;
@@ -159,7 +159,7 @@ const orderSlice = createSlice({
         action?.payload?.success === false &&
         action?.payload?.message === "Login First"
       ) {
-        <Navigate to="/" />;
+        <Navigate to="/" replace />;
         toast.dismiss();
         toast.error(action.payload.message);
         return;
@@ -203,7 +203,7 @@ const orderSlice = createSlice({
         action?.payload?.success === false &&
         action?.payload?.message === "Login First"
       ) {
-        <Navigate to="/" />;
+        <Navigate to="/" replace />;
         toast.dismiss();
         toast.error(action.payload.message);
         return;
@@ -248,7 +248,7 @@ const orderSlice = createSlice({
         action?.payload?.success === false &&
         action?.payload?.message === "Login First"
       ) {
-        <Navigate to="/" />;
+        <Navigate to="/" replace />;
         toast.dismiss();
         toast.error(action.payload.message);
         return;

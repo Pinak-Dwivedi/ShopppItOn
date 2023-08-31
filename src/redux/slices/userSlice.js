@@ -156,7 +156,7 @@ const userSlice = createSlice({
         state.isAuthenticated = false;
         state.user = null;
 
-        <Navigate to="/" />;
+        <Navigate to="/" replace />;
 
         toast.dismiss();
         toast.error(action.payload.message);
@@ -189,7 +189,7 @@ const userSlice = createSlice({
       state.validationError = null;
       state.user = null;
 
-      <Navigate to="/" />;
+      <Navigate to="/" replace />;
 
       toast.dismiss();
       toast.success(action.payload.message);
@@ -249,7 +249,7 @@ const userSlice = createSlice({
         state.isAuthenticated = false;
         state.user = null;
 
-        <Navigate to="/" />;
+        <Navigate to="/" replace />;
 
         toast.dismiss();
         toast.error(action.payload.message);
@@ -289,7 +289,7 @@ const userSlice = createSlice({
         state.isAuthenticated = false;
         state.user = null;
 
-        <Navigate to="/" />;
+        <Navigate to="/" replace />;
 
         toast.dismiss();
         toast.error(action.payload.message);
