@@ -93,8 +93,25 @@ const productSlice = createSlice({
       state.isLoading = false;
       state.validationError = null;
 
-      if (action?.payload?.latestProducts != null)
-        state.latestProducts = action.payload.latestProducts;
+      if (action?.payload?.latestProducts != null) {
+        let latestProducts = action.payload.latestProducts;
+
+        let organizedLatestProducts = [];
+
+        organizedLatestProducts.push(
+          latestProducts.filter((p) => p.productCategory === "Electronics")
+        );
+
+        organizedLatestProducts.push(
+          latestProducts.filter((p) => p.productCategory === "Footwear")
+        );
+
+        organizedLatestProducts.push(
+          latestProducts.filter((p) => p.productCategory === "Jeans")
+        );
+
+        state.latestProducts = organizedLatestProducts;
+      }
 
       state.products = action.payload.products;
 
