@@ -1,5 +1,5 @@
 import "./Product.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductThunk } from "../../redux/slices/productSlice";
@@ -12,15 +12,20 @@ import Review from "./review/Review";
 
 export default function Product() {
   const { state } = useLocation();
-  const navigate = useNavigate();
   const productId = state?.productId;
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const { productDetails } = useSelector((state) => state.product);
   const { isLoading } = useSelector((state) => state.cart);
   const [cartCounter, setCartCounter] = useState(1);
+
+  useEffect(() => {
+    dispatch(getProductThunk(productId));
+  }, [dispatch, productId]);
 
   let stars;
   let displayStars = [];
@@ -58,23 +63,6 @@ export default function Product() {
       ));
     }
   }
-
-  const shouldMakeGetProductRequest = useRef(true);
-
-  useEffect(() => {
-    if (shouldMakeGetProductRequest.current === true) {
-      dispatch(
-        getProductThunk({
-          productId,
-          query: "page=1",
-        })
-      );
-
-      return () => {
-        shouldMakeGetProductRequest.current = false;
-      };
-    }
-  }, [dispatch, productId]);
 
   function prevImage() {
     setActiveImageIndex((activeImageIndex) => {

@@ -97,7 +97,7 @@ function App() {
           <Route path="/product/:name" element={<Product />} />
           <Route path="/productlisting" element={<ProductListing />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/orders" element={isAuthenticated ? <Orders /> : null} />
+          {isAuthenticated && <Route path="/orders" element={<Orders />} />}
           <Route path="/users" element={<Users />} />
 
           {stripeAPIKey != null ? (

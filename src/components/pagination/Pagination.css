@@ -12,8 +12,10 @@
 
 .pagination__previousButton,
 .pagination__nextButton {
+  border: none;
+  background: none;
+  outline: none;
   font-size: 1.7rem;
-  cursor: pointer;
   color: orangered;
   width: 1.5rem;
   height: 1.5rem;
@@ -24,10 +26,16 @@
   padding: 0.5em;
 }
 
-.pagination__previousButton:hover,
-.pagination__nextButton:hover {
+.pagination__previousButton:hover:not(:disabled),
+.pagination__nextButton:hover:not(:disabled) {
+  cursor: pointer;
   background-color: orangered;
   color: white;
+}
+
+.pagination__previousButton:disabled,
+.pagination__nextButton:disabled {
+  opacity: 0.5;
 }
 
 .pagination__numberButtons {

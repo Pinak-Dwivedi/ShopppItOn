@@ -1,5 +1,5 @@
 import "./Profile.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
@@ -9,7 +9,6 @@ import {
 } from "../../redux/slices/userSlice";
 
 export default function Profile() {
-  const shouldMakeGetProfileCall = useRef(true);
   const dispatch = useDispatch();
   const { state } = useLocation();
 
@@ -28,13 +27,7 @@ export default function Profile() {
   }
 
   useEffect(() => {
-    if (shouldMakeGetProfileCall.current === true) {
-      dispatch(checkUserAuthentication());
-
-      return () => {
-        shouldMakeGetProfileCall.current = false;
-      };
-    }
+    dispatch(checkUserAuthentication());
   }, [dispatch]);
 
   const [username, setUsername] = useState(userData?.name);

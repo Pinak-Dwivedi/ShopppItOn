@@ -1,8 +1,8 @@
 import "./Orders.css";
 import Order from "./Order/Order";
 import Pagination from "../pagination/Pagination";
-import { useEffect, useRef } from "react";
-import { Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Navigate, useSearchParams } from "react-router-dom";
 import {
   getOrdersThunk,
   getAllOrdersThunk,
@@ -12,52 +12,49 @@ import { useDispatch, useSelector } from "react-redux";
 import formatNumberAsPrice from "../../utils/formatNumberAsPrice";
 
 export default function Orders() {
-  const shouldMakeGetOrdersCall = useRef(true);
   const dispatch = useDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const { orders, pagination, totalOrdersPrice } = useSelector(
     (state) => state.order
   );
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
-  useEffect(() => {
-    if (shouldMakeGetOrdersCall.current === true) {
-      if (isAuthenticated && user.role === "admin") {
-        dispatch(getAllOrdersThunk("page=1"));
-      } else if (isAuthenticated) {
-        dispatch(getOrdersThunk("page=1"));
-      }
+  const page = searchParams.get("page");
 
-      return () => {
-        shouldMakeGetOrdersCall.current = false;
-      };
+  useEffect(() => {
+    if (isAuthenticated && user.role === "admin") {
+      dispatch(getAllOrdersThunk(searchParams.toString()));
+    } else if (isAuthenticated) {
+      dispatch(getOrdersThunk(searchParams.toString()));
     }
-  }, [dispatch, isAuthenticated, user]);
+  }, [dispatch, isAuthenticated, user, page]);
 
   if (!isAuthenticated) return <Navigate to="/" replace />;
 
+  function handlePageChange(newPageNum) {
+    setSearchParams(
+      (prev) => {
+        prev.set("page", newPageNum);
+
+        return prev;
+      },
+      {
+        replace: true,
+      }
+    );
+  }
+
   function onPrevPage(newPage) {
-    if (isAuthenticated && user.role === "admin") {
-      dispatch(getAllOrdersThunk(`page=${newPage}`));
-    } else if (isAuthenticated) {
-      dispatch(getOrdersThunk(`page=${newPage}`));
-    }
+    handlePageChange(newPage);
   }
 
   function onNextPage(newPage) {
-    if (isAuthenticated && user.role === "admin") {
-      dispatch(getAllOrdersThunk(`page=${newPage}`));
-    } else if (isAuthenticated) {
-      dispatch(getOrdersThunk(`page=${newPage}`));
-    }
+    handlePageChange(newPage);
   }
 
   function onPageNum(pNum) {
-    if (isAuthenticated && user.role === "admin") {
-      dispatch(getAllOrdersThunk(`page=${pNum}`));
-    } else if (isAuthenticated) {
-      dispatch(getOrdersThunk(`page=${pNum}`));
-    }
+    handlePageChange(pNum);
   }
 
   return (

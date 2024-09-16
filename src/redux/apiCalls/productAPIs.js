@@ -20,12 +20,10 @@ export async function getProducts(query, { rejectWithValue }) {
   }
 }
 
-export async function getProduct(getProductInfo, { rejectWithValue }) {
+export async function getProduct(productId, { rejectWithValue }) {
   try {
-    const { productId, query } = getProductInfo;
-
     const res = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/products/${productId}?${query}`,
+      `${process.env.REACT_APP_SERVER_URL}/products/${productId}`,
       {
         credentials: "include",
       }

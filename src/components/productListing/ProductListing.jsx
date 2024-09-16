@@ -2,121 +2,113 @@ import "./ProductListing.css";
 import ProductListFilter from "./productListFilter/ProductListFilter";
 import ProductListProduct from "./productListProduct/ProductListProduct";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import {
   getProductsThunk,
   sortProducts,
-  setSearchQuery,
 } from "../../redux/slices/productSlice";
 import Pagination from "../pagination/Pagination";
 
 export default function ProductListing() {
-  const shouldMakeGetProductsRequest = useRef(true);
-
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const {
     isLoading,
     products,
-    searchQuery,
     pagination: paginationDetails,
   } = useSelector((state) => state.product);
 
-  const [sortStatus, setSortStatus] = useState({
-    priceLowToHigh: false,
-    priceHighToLow: false,
-    newestFist: false,
-  });
+  const priceLowToHigh = searchParams.get("priceLowToHigh"),
+    priceHighToLow = searchParams.get("priceHighToLow"),
+    newestFirst = searchParams.get("newestFirst");
 
   useEffect(() => {
-    if (shouldMakeGetProductsRequest.current === true) {
-      let query = `${searchQuery.search}${searchQuery.filter}${searchQuery.page}`;
+    if (priceLowToHigh === "true") dispatch(sortProducts("priceLowToHigh"));
+    else if (priceHighToLow === "true")
+      dispatch(sortProducts("priceHighToLow"));
+    else if (newestFirst === "true") dispatch(sortProducts("newestFirst"));
+  }, [dispatch, priceLowToHigh, priceHighToLow, newestFirst]);
 
-      dispatch(getProductsThunk(query));
+  const search = searchParams.get("search"),
+    page = searchParams.get("page"),
+    category = searchParams.getAll("category").toString(),
+    priceMin = searchParams.get("priceMin"),
+    priceMax = searchParams.get("priceMax"),
+    rating3Star = searchParams.get("rating3Star"),
+    rating4Star = searchParams.get("rating4Star");
 
-      return () => {
-        shouldMakeGetProductsRequest.current = false;
-      };
-    }
-  }, [dispatch, searchQuery.search, searchQuery.filter, searchQuery.page]);
+  useEffect(() => {
+    dispatch(getProductsThunk(searchParams.toString()));
+  }, [
+    dispatch,
+    search,
+    page,
+    category,
+    priceMin,
+    priceMax,
+    rating3Star,
+    rating4Star,
+  ]);
 
   function sortPriceLowToHigh() {
-    dispatch(sortProducts("priceLowToHigh"));
+    setSearchParams(
+      (prev) => {
+        prev.delete("priceHighToLow");
+        prev.delete("newestFirst");
+        prev.set("priceLowToHigh", "true");
 
-    setSortStatus({
-      priceLowToHigh: true,
-      priceHighToLow: false,
-      newestFist: false,
-    });
+        return prev;
+      },
+      { replace: true }
+    );
   }
 
   function sortPriceHighToLow() {
-    dispatch(sortProducts("priceHighToLow"));
+    setSearchParams(
+      (prev) => {
+        prev.delete("priceLowToHigh");
+        prev.delete("newestFirst");
+        prev.set("priceHighToLow", "true");
 
-    setSortStatus({
-      priceLowToHigh: false,
-      priceHighToLow: true,
-      newestFist: false,
-    });
+        return prev;
+      },
+      { replace: true }
+    );
   }
 
   function sortNewestFirst() {
-    dispatch(sortProducts("newestFirst"));
+    setSearchParams(
+      (prev) => {
+        prev.delete("priceHighToLow");
+        prev.delete("priceLowToHigh");
+        prev.set("newestFirst", "true");
 
-    setSortStatus({
-      priceLowToHigh: false,
-      priceHighToLow: false,
-      newestFist: true,
+        return prev;
+      },
+      { replace: true }
+    );
+  }
+
+  function handlePageChange(newPageNum) {
+    setSearchParams((prev) => {
+      prev.set("page", newPageNum);
+
+      return prev;
     });
   }
 
-  // pagination
-
   function onPrevPage(newPageNum) {
-    dispatch(
-      setSearchQuery({
-        ...searchQuery,
-        page: `page=${newPageNum}`,
-      })
-    );
-
-    let query = `${searchQuery.search}${searchQuery.filter}page=${newPageNum}`;
-
-    dispatch(getProductsThunk(`${query}`));
-
-    navigate(`/productlisting?${query}`);
+    handlePageChange(newPageNum);
   }
 
   function onNextPage(newPageNum) {
-    dispatch(
-      setSearchQuery({
-        ...searchQuery,
-        page: `page=${newPageNum}`,
-      })
-    );
-
-    let query = `${searchQuery.search}${searchQuery.filter}page=${newPageNum}`;
-
-    dispatch(getProductsThunk(`${query}`));
-
-    navigate(`/productlisting?${query}`);
+    handlePageChange(newPageNum);
   }
 
-  function onPageNum(newPageNum) {
-    dispatch(
-      setSearchQuery({
-        ...searchQuery,
-        page: `page=${newPageNum}`,
-      })
-    );
-
-    let query = `${searchQuery.search}${searchQuery.filter}page=${newPageNum}`;
-
-    dispatch(getProductsThunk(`${query}`));
-
-    navigate(`/productlisting?${query}`);
+  function onPageNum(pNum) {
+    handlePageChange(pNum);
   }
 
   return (
@@ -125,7 +117,7 @@ export default function ProductListing() {
         <span className="productListing__sortHeading">Sort By</span>
         <button
           className={`productListing__sortButton ${
-            sortStatus.priceLowToHigh ? "active" : ""
+            searchParams.get("priceLowToHigh") === "true" ? "active" : ""
           }`}
           disabled={isLoading}
           onClick={sortPriceLowToHigh}
@@ -134,7 +126,7 @@ export default function ProductListing() {
         </button>
         <button
           className={`productListing__sortButton ${
-            sortStatus.priceHighToLow ? "active" : ""
+            searchParams.get("priceHighToLow") === "true" ? "active" : ""
           }`}
           disabled={isLoading}
           onClick={sortPriceHighToLow}
@@ -143,7 +135,7 @@ export default function ProductListing() {
         </button>
         <button
           className={`productListing__sortButton ${
-            sortStatus.newestFist ? "active" : ""
+            searchParams.get("newestFirst") === "true" ? "active" : ""
           }`}
           disabled={isLoading}
           onClick={sortNewestFirst}

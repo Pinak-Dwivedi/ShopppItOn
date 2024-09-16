@@ -1,24 +1,16 @@
 import "./Home.css";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductsThunk } from "../../redux/slices/productSlice";
 import CategorySection from "../categorySection/CategorySection";
 
 export default function Home() {
-  const shouldMakeGetProductsRequest = useRef(true);
-
   const { latestProducts } = useSelector((state) => state.product);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (shouldMakeGetProductsRequest.current === true) {
-      dispatch(getProductsThunk("latest=true"));
-
-      return () => {
-        shouldMakeGetProductsRequest.current = false;
-      };
-    }
+    dispatch(getProductsThunk("latest=true"));
   }, [dispatch]);
 
   return (

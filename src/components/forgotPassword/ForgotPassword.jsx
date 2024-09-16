@@ -50,7 +50,7 @@ export default function ForgotPassword({ forgotPasswordRef, loginRef }) {
             htmlFor="forgotPasswordEmail"
           >
             Lost your password? Please enter your email address. You will
-            receive a link to create a new password via email.
+            receive a link via email to create a new password.
           </div>
           <div className="forgotPassword__formField">
             <label
@@ -82,7 +82,9 @@ export default function ForgotPassword({ forgotPasswordRef, loginRef }) {
         </form>
 
         <div className="forgotPassword__toLogin">
-          <span className="forgotPassword__toLoginText">Remeber password?</span>
+          <span className="forgotPassword__toLoginText">
+            Remember password?
+          </span>
           <button
             className="forgotPassword__toLoginButton"
             onClick={forgotPasswordToLogin}

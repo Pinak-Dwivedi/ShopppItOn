@@ -1,101 +1,72 @@
 import "./ProductListFilter.css";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
-import {
-  getProductsThunk,
-  setSearchQuery,
-} from "../../../redux/slices/productSlice";
 
 export default function ProductListFilter() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { isLoading, searchQuery } = useSelector((state) => state.product);
+  const { isLoading } = useSelector((state) => state.product);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [categoryFilter, setCategoryFilter] = useState({
-    electronics: {
-      status: searchQuery.filter.includes("Electronics") ? true : false,
-      value: searchQuery.filter.includes("Electronics") ? "Electronics" : "",
-    },
-    footwear: {
-      status: searchQuery.filter.includes("Footwear") ? true : false,
-      value: searchQuery.filter.includes("Footwear") ? "Footwear" : "",
-    },
-    glasses: {
-      status: searchQuery.filter.includes("Glasses") ? true : false,
-      value: searchQuery.filter.includes("Glasses") ? "Glasses" : "",
-    },
-    jeans: {
-      status: searchQuery.filter.includes("Jeans") ? true : false,
-      value: searchQuery.filter.includes("Jeans") ? "Jeans" : "",
-    },
-    tShirt: {
-      status: searchQuery.filter.includes("T-Shirt") ? true : false,
-      value: searchQuery.filter.includes("T-Shirt") ? "T-Shirt" : "",
-    },
+  const [categoryFilter, setCategoryFilter] = useState((prev) => {
+    const category = searchParams.get("category") || [];
+
+    return {
+      Electronics: category.includes("Electronics"),
+      Footwear: category.includes("Footwear"),
+      Glasses: category.includes("Glasses"),
+      Jeans: category.includes("Jeans"),
+      "T-Shirt": category.includes("T-Shirt"),
+    };
   });
 
   const [priceFilter, setPriceFilter] = useState({
-    priceMin: "min",
-    priceMax: "max",
+    priceMin: searchParams.get("priceMin") || "min",
+    priceMax: searchParams.get("priceMax") || "max",
   });
 
   const [ratingFilter, setRatingFilter] = useState({
-    rating3Star: {
-      status: searchQuery.filter.includes("rating3Star") ? true : false,
-      value: searchQuery.filter.includes("rating3Star") ? "T-Shirt" : "",
-    },
-    rating4Star: {
-      status: searchQuery.filter.includes("rating4Star") ? true : false,
-      value: searchQuery.filter.includes("rating4Star") ? "T-Shirt" : "",
-    },
+    rating3Star: searchParams.get("rating3Star") === "true",
+    rating4Star: searchParams.get("rating4Star") === "true",
   });
 
-  function prepareGetProductsQuery() {
-    // category
-    const { electronics, footwear, glasses, jeans, tShirt } = categoryFilter;
+  function updateSearchParamsFilters() {
+    setSearchParams(
+      (prev) => {
+        // category filters
+        prev.delete("category");
 
-    let queryString = "";
+        for (let key in categoryFilter) {
+          if (categoryFilter[key]) prev.append("category", key);
+        }
 
-    if (electronics.value !== "")
-      queryString += `category=${electronics.value}&`;
-    if (footwear.value !== "") queryString += `category=${footwear.value}&`;
-    if (glasses.value !== "") queryString += `category=${glasses.value}&`;
-    if (jeans.value !== "") queryString += `category=${jeans.value}&`;
-    if (tShirt.value !== "") queryString += `category=${tShirt.value}&`;
+        // price filters
+        if (priceFilter.priceMin !== "min")
+          prev.set("priceMin", priceFilter.priceMin);
+        else {
+          prev.delete("priceMin");
+        }
 
-    // price
-    if (priceFilter.priceMin !== "min")
-      queryString += `priceMin=${priceFilter.priceMin}&`;
+        if (priceFilter.priceMax !== "max")
+          prev.set("priceMax", priceFilter.priceMax);
+        else {
+          prev.delete("priceMax");
+        }
 
-    if (priceFilter.priceMax !== "max")
-      queryString += `priceMax=${priceFilter.priceMax}&`;
+        // rating filters
+        if (ratingFilter.rating3Star) prev.set("rating3Star", "true");
+        else prev.delete("rating3Star");
 
-    // rating
-    if (ratingFilter.rating3Star.value !== "")
-      queryString += `rating3Star=true&`;
+        if (ratingFilter.rating4Star) prev.set("rating4Star", "true");
+        else prev.delete("rating4Star");
 
-    if (ratingFilter.rating4Star.value !== "")
-      queryString += `rating4Star=true&`;
-
-    return queryString;
+        return prev;
+      },
+      { replace: true }
+    );
   }
 
   function applyFilter() {
-    const queryString = prepareGetProductsQuery();
-
-    dispatch(
-      setSearchQuery({
-        ...searchQuery,
-        filter: queryString,
-      })
-    );
-
-    let query = `${searchQuery.search}${queryString}${searchQuery.page}`;
-
-    dispatch(getProductsThunk(query));
-
-    navigate(`/productlisting?${query}`);
+    updateSearchParamsFilters();
   }
 
   return (
@@ -118,17 +89,12 @@ export default function ProductListFilter() {
               className="productListFilter__categoryInput"
               type="checkbox"
               id="electronics"
-              checked={categoryFilter.electronics.status}
+              checked={categoryFilter["Electronics"]}
               onChange={() =>
                 setCategoryFilter((categoryFilter) => {
                   return {
                     ...categoryFilter,
-                    electronics: {
-                      status: !categoryFilter.electronics.status,
-                      value: !categoryFilter.electronics.status
-                        ? "Electronics"
-                        : "",
-                    },
+                    Electronics: !categoryFilter["Electronics"],
                   };
                 })
               }
@@ -146,15 +112,12 @@ export default function ProductListFilter() {
               className="productListFilter__categoryInput"
               type="checkbox"
               id="footwear"
-              checked={categoryFilter.footwear.status}
+              checked={categoryFilter["Footwear"]}
               onChange={() =>
                 setCategoryFilter((categoryFilter) => {
                   return {
                     ...categoryFilter,
-                    footwear: {
-                      status: !categoryFilter.footwear.status,
-                      value: !categoryFilter.footwear.status ? "Footwear" : "",
-                    },
+                    Footwear: !categoryFilter["Footwear"],
                   };
                 })
               }
@@ -171,15 +134,12 @@ export default function ProductListFilter() {
               className="productListFilter__categoryInput"
               type="checkbox"
               id="glasses"
-              checked={categoryFilter.glasses.status}
+              checked={categoryFilter["Glasses"]}
               onChange={() =>
                 setCategoryFilter((categoryFilter) => {
                   return {
                     ...categoryFilter,
-                    glasses: {
-                      status: !categoryFilter.glasses.status,
-                      value: !categoryFilter.glasses.status ? "Glasses" : "",
-                    },
+                    Glasses: !categoryFilter["Glasses"],
                   };
                 })
               }
@@ -194,15 +154,12 @@ export default function ProductListFilter() {
               className="productListFilter__categoryInput"
               type="checkbox"
               id="jeans"
-              checked={categoryFilter.jeans.status}
+              checked={categoryFilter["Jeans"]}
               onChange={() =>
                 setCategoryFilter((categoryFilter) => {
                   return {
                     ...categoryFilter,
-                    jeans: {
-                      status: !categoryFilter.jeans.status,
-                      value: !categoryFilter.jeans.status ? "Jeans" : "",
-                    },
+                    Jeans: !categoryFilter["Jeans"],
                   };
                 })
               }
@@ -220,15 +177,12 @@ export default function ProductListFilter() {
               className="productListFilter__categoryInput"
               type="checkbox"
               id="t-shirt"
-              checked={categoryFilter.tShirt.status}
+              checked={categoryFilter["T-Shirt"]}
               onChange={() =>
                 setCategoryFilter((categoryFilter) => {
                   return {
                     ...categoryFilter,
-                    tShirt: {
-                      status: !categoryFilter.tShirt.status,
-                      value: !categoryFilter.tShirt.status ? "T-Shirt" : "",
-                    },
+                    "T-Shirt": !categoryFilter["T-Shirt"],
                   };
                 })
               }
@@ -316,17 +270,12 @@ export default function ProductListFilter() {
               className="productListFilter__ratingListFilterInput"
               type="checkbox"
               id="4Star"
-              checked={ratingFilter.rating4Star.status}
+              checked={ratingFilter.rating4Star}
               onChange={() =>
                 setRatingFilter((ratingFilter) => {
                   return {
                     ...ratingFilter,
-                    rating4Star: {
-                      status: !ratingFilter.rating4Star.status,
-                      value: !ratingFilter.rating4Star.status
-                        ? "rating4Star"
-                        : "",
-                    },
+                    rating4Star: !ratingFilter.rating4Star,
                   };
                 })
               }
@@ -343,17 +292,12 @@ export default function ProductListFilter() {
               className="productListFilter__ratingListFilterInput"
               type="checkbox"
               id="3Star"
-              checked={ratingFilter.rating3Star.status}
+              checked={ratingFilter.rating3Star}
               onChange={() =>
                 setRatingFilter((ratingFilter) => {
                   return {
                     ...ratingFilter,
-                    rating3Star: {
-                      status: !ratingFilter.rating3Star.status,
-                      value: !ratingFilter.rating3Star.status
-                        ? "rating3Star"
-                        : "",
-                    },
+                    rating3Star: !ratingFilter.rating3Star,
                   };
                 })
               }

@@ -27,24 +27,14 @@ const productSlice = createSlice({
   initialState: {
     isLoading: false,
     validationError: null,
-    searchQuery: {
-      search: "",
-      filter: "",
-      page: "",
-    },
     latestProducts: null,
     products: null,
     pagination: null,
-
     productDetails: null,
     reviewsDetails: null,
   },
 
   reducers: {
-    setSearchQuery: (state, action) => {
-      state.searchQuery = action.payload;
-    },
-
     sortProducts(state, action) {
       if (state.products != null) {
         state.isLoading = true;
@@ -96,19 +86,30 @@ const productSlice = createSlice({
       if (action?.payload?.latestProducts != null) {
         let latestProducts = action.payload.latestProducts;
 
-        let organizedLatestProducts = [];
+        let organizedLatestProducts = [[], [], []];
 
-        organizedLatestProducts.push(
-          latestProducts.filter((p) => p.productCategory === "Electronics")
-        );
+        latestProducts.forEach((p) => {
+          if (
+            p.productCategory === "Electronics" &&
+            organizedLatestProducts[0].length < 3
+          ) {
+            organizedLatestProducts[0].push(p);
+          }
 
-        organizedLatestProducts.push(
-          latestProducts.filter((p) => p.productCategory === "Footwear")
-        );
+          if (
+            p.productCategory === "Footwear" &&
+            organizedLatestProducts[1].length < 3
+          ) {
+            organizedLatestProducts[1].push(p);
+          }
 
-        organizedLatestProducts.push(
-          latestProducts.filter((p) => p.productCategory === "Jeans")
-        );
+          if (
+            p.productCategory === "Jeans" &&
+            organizedLatestProducts[2].length < 3
+          ) {
+            organizedLatestProducts[2].push(p);
+          }
+        });
 
         state.latestProducts = organizedLatestProducts;
       }
@@ -117,22 +118,21 @@ const productSlice = createSlice({
 
       if (action?.payload?.pagination != null)
         state.pagination = action.payload.pagination;
-
-      // toast.dismiss();
-      // toast.success(action.payload.message);
     });
 
     builder.addCase(getProductsThunk.rejected, (state, action) => {
       state.isLoading = false;
+      state.validationError = null;
 
       if (action?.payload?.success === false) {
         toast.dismiss();
         toast.error(action.payload.message);
-        return;
-      }
 
-      // toast.dismiss();
-      // toast.error(action.error.message);
+        if (action?.payload?.products?.length === 0) {
+          state.products = null;
+          state.pagination = null;
+        }
+      }
     });
 
     // get product
@@ -148,9 +148,6 @@ const productSlice = createSlice({
       state.validationError = null;
 
       state.productDetails = action.payload.productDetails;
-
-      if (action.payload.reviewsDetails != null)
-        state.reviewsDetails = action.payload.reviewsDetails;
     });
 
     builder.addCase(getProductThunk.rejected, (state, action) => {
@@ -159,11 +156,11 @@ const productSlice = createSlice({
       if (action?.payload?.success === false) {
         toast.dismiss();
         toast.error(action.payload.message);
-        return;
       }
 
-      // toast.dismiss();
-      // toast.error(action.error.message);
+      if (action?.payload.message === "No such product found!") {
+        state.productDetails = null;
+      }
     });
 
     // get product reviews
@@ -187,11 +184,10 @@ const productSlice = createSlice({
       if (action?.payload?.success === false) {
         // toast.dismiss();
         // toast.error(action.payload.message);
-        return;
       }
 
-      // toast.dismiss();
-      // toast.error(action.error.message);
+      if (action?.payload?.message === "No reviews found!")
+        state.reviewsDetails = null;
     });
 
     // create product
@@ -221,11 +217,7 @@ const productSlice = createSlice({
       if (action?.payload?.success === false) {
         toast.dismiss();
         toast.error(action.payload.message);
-        return;
       }
-
-      // toast.dismiss();
-      // toast.error(action.error.message);
     });
 
     // update product
@@ -255,11 +247,7 @@ const productSlice = createSlice({
       if (action?.payload?.success === false) {
         toast.dismiss();
         toast.error(action.payload.message);
-        return;
       }
-
-      // toast.dismiss();
-      // toast.error(action.error.message);
     });
 
     // create product review
@@ -289,11 +277,7 @@ const productSlice = createSlice({
       if (action?.payload?.success === false) {
         toast.dismiss();
         toast.error(action.payload.message);
-        return;
       }
-
-      // toast.dismiss();
-      // toast.error(action.error.message);
     });
   },
 });
@@ -307,4 +291,4 @@ export {
   updateProductThunk,
   createProductReviewThunk,
 };
-export const { setSearchQuery, sortProducts } = productSlice.actions;
+export const { sortProducts } = productSlice.actions;

@@ -8,6 +8,7 @@ import {
 import { FaStar } from "react-icons/fa";
 import ReviewUser from "./reviewUser/ReviewUser";
 import Pagination from "../../pagination/Pagination";
+import { useSearchParams } from "react-router-dom";
 
 export default function Review({ productId }) {
   const addReviewFormRef = useRef();
@@ -24,17 +25,16 @@ export default function Review({ productId }) {
   const { reviewsDetails, validationError } = useSelector(
     (state) => state.product
   );
-  const shouldMakeGetProductReviewsRequest = useRef(true);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const page = searchParams.get("page");
 
   useEffect(() => {
-    if (shouldMakeGetProductReviewsRequest.current === true) {
-      dispatch(getProductReviewsThunk({ productId, query: "page=1" }));
-
-      return () => {
-        shouldMakeGetProductReviewsRequest.current = false;
-      };
-    }
-  }, [dispatch, productId]);
+    dispatch(
+      getProductReviewsThunk({ productId, query: searchParams.toString() })
+    );
+  }, [dispatch, productId, page]);
 
   function giveReview(e) {
     e.preventDefault();
@@ -51,20 +51,32 @@ export default function Review({ productId }) {
     );
   }
 
-  function onPrevPage(newPageNum) {
-    dispatch(
-      getProductReviewsThunk({ productId, query: `page=${newPageNum}` })
+  function handlePageChange(newPageNum) {
+    setSearchParams(
+      (prev) => {
+        prev.set("page", newPageNum);
+
+        return prev;
+      },
+      {
+        replace: true,
+        state: {
+          productId,
+        },
+      }
     );
+  }
+
+  function onPrevPage(newPageNum) {
+    handlePageChange(newPageNum);
   }
 
   function onNextPage(newPageNum) {
-    dispatch(
-      getProductReviewsThunk({ productId, query: `page=${newPageNum}` })
-    );
+    handlePageChange(newPageNum);
   }
 
   function onPageNum(pNum) {
-    dispatch(getProductReviewsThunk({ productId, query: `page=${pNum}` }));
+    handlePageChange(pNum);
   }
 
   return (
@@ -146,7 +158,7 @@ export default function Review({ productId }) {
               className="review__ratingTitle"
               value={reviewTitle}
               onChange={(e) => setReviewTitle(e.target.value)}
-              placeholder="e.g:- Product Title"
+              placeholder="e.g:- Review Title"
             />
             <span className="review__addReviewFormError">
               {validationError?.title}
@@ -161,7 +173,7 @@ export default function Review({ productId }) {
               className="review__ratingDescription"
               value={reviewDescription}
               onChange={(e) => setReviewDescription(e.target.value)}
-              placeholder="e.g:- Product Description"
+              placeholder="e.g:- Review Description"
             ></textarea>
             <span className="review__addReviewFormError">
               {validationError?.description}

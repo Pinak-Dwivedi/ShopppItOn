@@ -1,20 +1,16 @@
 import "./Header.css";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getProductsThunk,
-  setSearchQuery,
-} from "../../redux/slices/productSlice";
 
 import { clearLoadingAndValidationError } from "../../redux/slices/userSlice";
-import { BiSearchAlt } from "react-icons/bi";
 
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import Navbar from "../navbar/Navbar";
 import Login from "../login/Login";
 import SignUp from "../signUp/SignUp";
 import ForgotPassword from "../forgotPassword/ForgotPassword";
+import SearchBar from "../searchbar/SearchBar";
 
 export default function Header() {
   const navRef = useRef();
@@ -25,10 +21,7 @@ export default function Header() {
 
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.user);
-  const { isLoading, searchQuery } = useSelector((state) => state.product);
   const { cartItemsCount } = useSelector((state) => state.cart);
-
-  const [search, setSearch] = useState(searchQuery.search);
 
   function openNav() {
     navRef.current.classList.add("navbar--active");
@@ -40,35 +33,6 @@ export default function Header() {
     }
     dispatch(clearLoadingAndValidationError());
     loginRef.current.classList.add("login--active");
-  }
-
-  function searchProducts(e) {
-    e.preventDefault();
-
-    let query = "";
-
-    if (search?.trim() === "") {
-      dispatch(
-        setSearchQuery({
-          ...searchQuery,
-          search: "",
-        })
-      );
-
-      query = `${searchQuery.filter}${searchQuery.page}`;
-    } else {
-      dispatch(
-        setSearchQuery({
-          ...searchQuery,
-          search: `search=${search}&`,
-        })
-      );
-      query = `search=${search}&${searchQuery.filter}${searchQuery.page}`;
-
-      dispatch(getProductsThunk(query));
-    }
-
-    navigate(`/productlisting?${query}`);
   }
 
   return (
@@ -86,22 +50,7 @@ export default function Header() {
           <div className="header__hamburgerSlice"></div>
         </div>
 
-        <form className="header__search" onSubmit={searchProducts}>
-          <input
-            className="header__searchInput"
-            type="search"
-            placeholder="Search Product"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <button
-            className="header__searchButton"
-            onClick={searchProducts}
-            disabled={isLoading}
-          >
-            <BiSearchAlt className="header__searchButton--image" />
-          </button>
-        </form>
+        <SearchBar />
 
         <div className="header__cartAndProfile">
           <div className="header__cart" onClick={() => navigate("/cart")}>
