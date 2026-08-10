@@ -13,70 +13,88 @@ import ForgotPassword from "../forgotPassword/ForgotPassword";
 import SearchBar from "../searchbar/SearchBar";
 
 export default function Header() {
-  const navRef = useRef();
-  const loginRef = useRef();
-  const signUpRef = useRef();
-  const forgotPasswordRef = useRef();
-  const navigate = useNavigate();
+    const navRef = useRef();
+    const loginRef = useRef();
+    const signUpRef = useRef();
+    const forgotPasswordRef = useRef();
+    const navigate = useNavigate();
 
-  const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector((state) => state.user);
-  const { cartItemsCount } = useSelector((state) => state.cart);
+    const dispatch = useDispatch();
+    const { isAuthenticated, isLoading } = useSelector((state) => state.user);
+    const { cartItemsCount } = useSelector((state) => state.cart);
 
-  function openNav() {
-    navRef.current.classList.add("navbar--active");
-  }
-
-  function openLogin() {
-    if (isAuthenticated) {
-      return navigate("/profile", { replace: true });
+    function openNav() {
+        navRef.current.classList.add("navbar--active");
     }
-    dispatch(clearLoadingAndValidationError());
-    loginRef.current.classList.add("login--active");
-  }
 
-  return (
-    <div className="header">
-      <Link to="/" className="header__logoLink">
-        <h1 className="header__logo">Shoppp It On</h1>
-      </Link>
+    function openLogin() {
+        if (isAuthenticated) {
+            return navigate("/profile", { replace: true });
+        }
+        dispatch(clearLoadingAndValidationError());
+        loginRef.current.classList.add("login--active");
+    }
 
-      <Navbar navRef={navRef} />
+    return (
+        <>
+            <div className="header">
+                <Link to="/" className="header__logoLink">
+                    <h1 className="header__logo">Shoppp It On</h1>
+                </Link>
 
-      <div className="header__actions">
-        <div className="header__hamburgerButton" onClick={openNav}>
-          <div className="header__hamburgerSlice"></div>
-          <div className="header__hamburgerSlice"></div>
-          <div className="header__hamburgerSlice"></div>
-        </div>
+                <Navbar navRef={navRef} />
 
-        <SearchBar />
+                <div className="header__actions">
+                    <div className="header__hamburgerButton" onClick={openNav}>
+                        <div className="header__hamburgerSlice"></div>
+                        <div className="header__hamburgerSlice"></div>
+                        <div className="header__hamburgerSlice"></div>
+                    </div>
 
-        <div className="header__cartAndProfile">
-          <div className="header__cart" onClick={() => navigate("/cart")}>
-            <FaShoppingCart /> CART
-            {cartItemsCount != null ? (
-              <sup className="header__cartItemsCount">{cartItemsCount}</sup>
-            ) : (
-              ""
+                    <SearchBar />
+
+                    <div className="header__cartAndProfile">
+                        <div
+                            className="header__cart"
+                            onClick={() => navigate("/cart")}
+                        >
+                            <FaShoppingCart /> CART
+                            {cartItemsCount != null ? (
+                                <sup className="header__cartItemsCount">
+                                    {cartItemsCount}
+                                </sup>
+                            ) : (
+                                ""
+                            )}
+                        </div>
+                        <div className="header__profile" onClick={openLogin}>
+                            <FaUser /> PROFILE
+                        </div>
+                    </div>
+                </div>
+
+                <Login
+                    loginRef={loginRef}
+                    signUpRef={signUpRef}
+                    forgotPasswordRef={forgotPasswordRef}
+                />
+                <SignUp signUpRef={signUpRef} loginRef={loginRef} />
+                <ForgotPassword
+                    forgotPasswordRef={forgotPasswordRef}
+                    loginRef={loginRef}
+                />
+            </div>
+
+            {isLoading && (
+                <div className="free-hosting-alert">
+                    <span className="free-hosting-alert-icon">ℹ️</span>
+                    <p className="free-hosting-alert-text">
+                        <strong>Note:</strong> First load may take 5-10 seconds
+                        due to free hosting spin-up. Thank you for your
+                        patience!
+                    </p>
+                </div>
             )}
-          </div>
-          <div className="header__profile" onClick={openLogin}>
-            <FaUser /> PROFILE
-          </div>
-        </div>
-      </div>
-
-      <Login
-        loginRef={loginRef}
-        signUpRef={signUpRef}
-        forgotPasswordRef={forgotPasswordRef}
-      />
-      <SignUp signUpRef={signUpRef} loginRef={loginRef} />
-      <ForgotPassword
-        forgotPasswordRef={forgotPasswordRef}
-        loginRef={loginRef}
-      />
-    </div>
-  );
+        </>
+    );
 }
